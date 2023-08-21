@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "838764967177",
+    "project_id": "adeiza-new-project",
+    "storage_bucket": "adeiza-new-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:838764967177:android:b766ccbab6298d9ebe4fd8",
+        "android_client_info": {
+          "package_name": "com.example.myfirst"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "838764967177-fd3hl6o85jf295s8ecq38pjka9of5upf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcrgnxGUyrSp66vioD-OWXYh2z_jwqJ-I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "838764967177-fd3hl6o85jf295s8ecq38pjka9of5upf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
