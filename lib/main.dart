@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:myfirst/firebase_options.dart';
+import 'package:myfirst/views/Register_view.dart';
+import 'package:myfirst/views/login_view.dart';
 
 
 void main() {
@@ -23,6 +25,10 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const Homepage(),
+      routes: {
+        '/login/': (context) => const LoginView(),
+        '/register/': (context) => const RegisterView(),
+      },
     );
   }
 }
@@ -32,30 +38,27 @@ class Homepage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold( appBar: AppBar(
-      title: const Text('Home'),
-    ),
-      body: FutureBuilder(
+    return FutureBuilder(
         future:  Firebase.initializeApp(
           options: DefaultFirebaseOptions.currentPlatform,
         ),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.done:
-              final user = FirebaseAuth.instance.currentUser;
-              if(user?.emailVerified ?? false){
-                print('Ýou are a verified user');
-              } else{
-                print('You need to verify your email first');
-              }
-              return const Text('Done');
+             // final user = FirebaseAuth.instance.currentUser;
+              //if(user?.emailVerified ?? false){
+                //print(user);
+                //return const Text('Done');
+              //} else{
+               //return const verifyEmailView();
+              //}
+              return const LoginView(); 
             default:
               return const Text('Loading...');
           }
 
         },
-      ),
-    );
+      );
 
   }
 }

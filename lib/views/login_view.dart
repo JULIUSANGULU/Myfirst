@@ -1,9 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:myfirst/firebase_options.dart';
-import 'package:myfirst/main.dart';
-import 'package:myfirst/views/Register_view.dart';
+
+
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -27,6 +25,71 @@ class _LoginViewState extends State<LoginView> {
     _email.dispose();
     _Password.dispose();
     super.dispose();
+  }
+  
+  @override
+  Widget build(BuildContext context) {
+    
+    return  Scaffold(
+      appBar: AppBar(title: const Text('Login')),
+      body: Column(
+                  children: [
+                    TextField(
+                      controller: _email,
+                      enableSuggestions: false,
+                      autocorrect: false,
+                      keyboardType:TextInputType.emailAddress,
+                      decoration: const InputDecoration(
+                        hintText: 'Enter your email here',
+                      ),
+                    ),
+                    TextField(
+                      controller: _Password,
+                      obscureText: true,
+                      enableSuggestions: false,
+                      autocorrect: false,
+                      decoration: const InputDecoration(
+                        hintText: 'Enter your password here',
+                      ),
+                    ),
+    
+                    TextButton(
+                      onPressed: () async{
+    
+    
+                        final email = _email.text;
+                        final password =_Password.text;
+                        try{
+                          final userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                            email: email,
+                            password: password,
+                          );
+                          print(userCredential);
+                        } on FirebaseAuthException catch (e){
+                          if(e.code =='user-not-found'){
+                            print('User not found');
+                          } else if(e.code == 'wrong-password'){
+                            print('wrong password');
+                          }else if(e.code == 'invalid-email'){
+                            print('Invalid Email Entered');
+    
+                          }
+                        }
+    
+                      },
+                      child: const Text('Login'),),
+                      TextButton(onPressed: () async{
+            Navigator.of(context).pushNamedAndRemoveUntil(
+              '/register/', (route) => false
+             );
+    
+          },
+           child: const Text('Not registered yet? Register here!'),
+           )
+                      
+                  ],
+                ),
+    );
   }
 
 
