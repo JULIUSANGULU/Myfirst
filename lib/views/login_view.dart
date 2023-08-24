@@ -4,6 +4,8 @@ import 'dart:developer' as devtools show log;
 
 import 'package:myfirst/constants/routes.dart';
 
+import '../utilities/show_error_dialog.dart';
+
 
 
 class LoginView extends StatefulWidget {
@@ -87,10 +89,15 @@ class _LoginViewState extends State<LoginView> {
                             await showErrorDialog(
                               context,
                                'Error: (e.code)',
-                               );
-                          }
-          
+                               ); 
+                          } 
                         }
+                        catch (e) {
+                            await showErrorDialog(
+                              context,
+                              e.toString(),
+                              );
+                          }
     
                       },
                       child: const Text('Login'),),
@@ -108,31 +115,3 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 }
-
-Future<void> showErrorDialog(
-  BuildContext context, 
-  String text,
-  ){
-    return showDialog(
-      context: context,
-       builder: (context){
-      return AlertDialog(
-        title: const Text('An error occured'),
-        content: Text(text),
-        actions: [
-          TextButton(
-            onPressed:(){
-            Navigator.of(context).pop();
-          },
-           child: const Text('Ok')),
-        ],
-      );
-    },);
-  }
-
-
-
-
-
-
-
