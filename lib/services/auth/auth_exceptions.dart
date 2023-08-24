@@ -1,0 +1,1 @@
+class UserNotFountAuthException implements Exception{}
