@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer' as devtools show log;
 
+import 'package:myfirst/constants/routes.dart';
+
 
 
 class LoginView extends StatefulWidget {
@@ -66,24 +68,35 @@ class _LoginViewState extends State<LoginView> {
                             password: password,
                           );
                           Navigator.of(context).pushNamedAndRemoveUntil(
-                            '/notes/', 
+                            notesRoute, 
                             (route) => false);
                         } on FirebaseAuthException catch (e){
                           if(e.code =='user-not-found'){
-                            devtools.log('User not found');
+                            await showErrorDialog(
+                              context,
+                               'User not found',
+                               );
                           } else if(e.code == 'wrong-password'){
-                            devtools.log('wrong password');
+                            await showErrorDialog(
+                              context,
+                               'Wrong Credentials',
+                               );
                           }else if(e.code == 'invalid-email'){
                             devtools.log('Invalid Email Entered');
-    
+                          } else{
+                            await showErrorDialog(
+                              context,
+                               'Error: (e.code)',
+                               );
                           }
+          
                         }
     
                       },
                       child: const Text('Login'),),
                       TextButton(onPressed: () async{
             Navigator.of(context).pushNamedAndRemoveUntil(
-              '/register/', (route) => false
+              registerRoute, (route) => false
              );
     
           },
@@ -94,9 +107,28 @@ class _LoginViewState extends State<LoginView> {
                 ),
     );
   }
-
-
 }
+
+Future<void> showErrorDialog(
+  BuildContext context, 
+  String text,
+  ){
+    return showDialog(
+      context: context,
+       builder: (context){
+      return AlertDialog(
+        title: const Text('An error occured'),
+        content: Text(text),
+        actions: [
+          TextButton(
+            onPressed:(){
+            Navigator.of(context).pop();
+          },
+           child: const Text('Ok')),
+        ],
+      );
+    },);
+  }
 
 
 
