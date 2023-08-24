@@ -1,3 +1,5 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:myfirst/firebase_options.dart';
 import 'package:myfirst/services/auth/auth_user.dart';
 import 'package:myfirst/services/auth/auth_provider.dart';
 import 'package:myfirst/services/auth/auth_exceptions.dart';
@@ -6,7 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart'
 
 class FirebaseAuthProvider implements AuthProvider{
   @override
-  AuthUser? get CurrentUser{
+  AuthUser? get currentUser{
     final user = FirebaseAuth.instance.currentUser;
     if(user != null){
       return AuthUser.fromFirebase(user);
@@ -25,7 +27,7 @@ class FirebaseAuthProvider implements AuthProvider{
           email: email,
           password: password,
         );
-        final user = CurrentUser;
+        final user = currentUser;
         if (user != null){
           return user;
         } else {
@@ -53,7 +55,7 @@ class FirebaseAuthProvider implements AuthProvider{
       email: email,
       password: password,
     );
-    final user = CurrentUser;
+    final user = currentUser;
     if (user != null){
           return user;
         } else {
@@ -84,8 +86,14 @@ class FirebaseAuthProvider implements AuthProvider{
       throw UserNotLoggedInAuthException();
     }
    }
-  }
-
+   
+     @override
+     Future<void> initialize() async {
+      await Firebase.initializeApp(
+          options: DefaultFirebaseOptions.currentPlatform,
+        );
+     }
+   
   @override
   Future<void> sendEmailVerification() async {
     final user = FirebaseAuth.instance.currentUser;
@@ -95,5 +103,4 @@ class FirebaseAuthProvider implements AuthProvider{
       throw UserNotLoggedInAuthException();
     }
   }
-
 }
