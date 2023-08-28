@@ -2,6 +2,7 @@ import 'package:myfirst/services/auth/auth_exceptions.dart';
 import 'package:myfirst/services/auth/auth_provider.dart';
 import 'package:myfirst/services/auth/auth_user.dart';
 import 'package:test/test.dart';
+
 void main(){
   group('Mock Authentication', () {
     final provider = MockAuthProvider();
