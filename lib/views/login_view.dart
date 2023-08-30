@@ -16,18 +16,18 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   late final TextEditingController _email;
-  late final TextEditingController _Password;
+  late final TextEditingController _password;
 
   @override
   void initState() {
     _email = TextEditingController();
-    _Password = TextEditingController();
+    _password = TextEditingController();
     super.initState();
   }
   @override
   void dispose() {
     _email.dispose();
-    _Password.dispose();
+    _password.dispose();
     super.dispose();
   }
   
@@ -48,7 +48,7 @@ class _LoginViewState extends State<LoginView> {
                       ),
                     ),
                     TextField(
-                      controller: _Password,
+                      controller: _password,
                       obscureText: true,
                       enableSuggestions: false,
                       autocorrect: false,
@@ -62,7 +62,7 @@ class _LoginViewState extends State<LoginView> {
     
     
                         final email = _email.text;
-                        final password =_Password.text;
+                        final password =_password.text;
                         try{
                            await AuthService.firebase().logIn(
                             email: email, 

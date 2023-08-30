@@ -5,7 +5,6 @@ import 'package:myfirst/views/Register_view.dart';
 import 'package:myfirst/views/login_view.dart';
 import 'package:myfirst/views/notes_view.dart';
 import 'dart:developer' as devtools show log;
-
 import 'package:myfirst/views/verify_email_view.dart';
 
 
@@ -53,10 +52,10 @@ class Homepage extends StatelessWidget {
                 } else{
                   return const LoginView();
                 }
-              }else{
-                return const LoginView();
+              } else{
+                return const NotesView();
               }
-              return const NotesView();
+              return const LoginView();
             default:
               return const Text('Loading...');
           }
