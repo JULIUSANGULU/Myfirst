@@ -13,6 +13,10 @@ class NotesService{
 
   List<DataBaseNote> _notes = [];
 
+  static final NotesService _shared = NotesService._sharedInstance();
+  NotesService._sharedInstance();
+  factory NotesService() => _shared;
+
   final _notesStreamController = 
   StreamController<List<DataBaseNote>>.broadcast();
   Stream<List<DataBaseNote>> get allNotes =>_notesStreamController.stream;
