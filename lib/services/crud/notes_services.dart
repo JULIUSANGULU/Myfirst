@@ -145,8 +145,6 @@ class NotesService{
       _notesStreamController.add(_notes);
 
       return note;
-
-
   }
 
   Future <DataBaseUser> getUser({required String email}) async{

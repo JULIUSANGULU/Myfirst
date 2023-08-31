@@ -35,7 +35,7 @@ class _NotesViewState extends State<NotesView> {
         title: const Text('Your Notes'),
         actions: [
           IconButton(onPressed: (){
-            Navigator.of(context).pushNamed(newNoteRoute);
+            Navigator.of(context).pushNamed(newNoteRoute); 
           }, icon: const Icon(Icons.add)),
           PopupMenuButton<MenuAction>(onSelected: (value) async{
             switch(value){
@@ -71,7 +71,7 @@ class _NotesViewState extends State<NotesView> {
               builder: (context, snapshot){
                 switch(snapshot.connectionState){
                   case ConnectionState.waiting:
-                  return const Text('Waiting for all notes');
+                  case ConnectionState.active:
                   default:
                   return const CircularProgressIndicator();
                 }
