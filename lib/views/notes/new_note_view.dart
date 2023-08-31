@@ -31,7 +31,7 @@ class _NewNoteViewState extends State<NewNoteView> {
     final text = _textController.text;
     await _notesService.updateNote(
       note: note,
-     text: text
+     text: text,
      );
   }
 
