@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myfirst/services/auth/auth_service.dart';
+import 'package:myfirst/views/notes/notes_list_view.dart';
 import '../../constants/routes.dart';
 import '../../enums/menu_action.dart';
 import 'package:myfirst/services/crud/notes_services.dart';
@@ -29,7 +30,7 @@ class _NotesViewState extends State<NotesView> {
         title: const Text('Your Notes'),
         actions: [
           IconButton(onPressed: (){
-            Navigator.of(context).pushNamed(newNoteRoute); 
+            Navigator.of(context).pushNamed(createOrUpdateNoteRoute); 
           }, icon: const Icon(Icons.add)),
           PopupMenuButton<MenuAction>(
             onSelected: (value) async{
@@ -69,18 +70,18 @@ class _NotesViewState extends State<NotesView> {
                   case ConnectionState.active:
                     if (snapshot.hasData){
                       final allNotes = snapshot.data as List<DataBaseNote>;
-                      return ListView.builder(itemCount: allNotes.length, itemBuilder: (context, index ){
-                        final note = allNotes[index];
-                        return ListTile(
-                          title: Text(
-                            note.text,
-                            maxLines: 1,
-                            softWrap: true,
-                            overflow: TextOverflow.ellipsis,
-                            ),
-                        );
-                      },
-                      );
+                      return NotesListView(
+                        notes: allNotes,
+                         onDeleteNote: (note) async{
+                          await _notesService.deleteNote(id: note.id);
+                         },
+                         onTap: (note) {
+                          Navigator.of(context).pushNamed(
+                            createOrUpdateNoteRoute,
+                            arguments: note,
+                            );
+                         },
+                         );
                     } else{
                       return const CircularProgressIndicator();
                     }
