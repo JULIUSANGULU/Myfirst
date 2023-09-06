@@ -77,6 +77,7 @@ class NotesService{
     whereArgs: [note.id],
     );
 
+    
     if (updatesCount == 0){
       throw CouldNotUpdateNote();
     } else {
