@@ -24,5 +24,4 @@ CloseDialog showLoadingDialog({
   );
 
   return() => Navigator.of(context).pop();
-
 }
