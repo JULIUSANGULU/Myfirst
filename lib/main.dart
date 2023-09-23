@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
       ),
       home: BlocProvider<AuthBloc>(
         create: (context) => AuthBloc(FirebaseAuthProvider()),
-        child: Homepage(),
+        child: const Homepage(),
       ),
       routes: {
         createOrUpdateNoteRoute: (context) => const CreateUpdateNoteView(),
